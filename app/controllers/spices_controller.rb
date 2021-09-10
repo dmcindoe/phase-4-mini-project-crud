@@ -11,13 +11,13 @@ class SpicesController < ApplicationController
   end
 
   def update
-    spice = Spice.find_by(id: params[:id])
+    spice = find_spice
     spice.update(spice_params)
     render json: spice
   end
 
   def destroy 
-    spice = Spice.find_by(id: params[:id])
+    spice = find_spice
     spice.destroy
     head :no_content
   end 
@@ -27,4 +27,9 @@ class SpicesController < ApplicationController
   def spice_params
     params.permit(:title, :image, :description, :notes, :rating)
   end
+
+  def find_spice
+    Spice.find_by(id: params[:id])
+  end
 end
+
